@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useState } from "react";
 import styled from "styled-components";
 import { work } from "../../content/work";
+import { type } from "../../lib/theme";
 import Heatmap from "../Heatmap";
 import { Filters, Grid, ListPanel, Reference } from "../References";
 import { Highlight, external } from "../ui";
@@ -14,11 +15,12 @@ const Feature = styled.div`
   h2 {
     margin: 0 0 10px;
     font: inherit;
-    font-size: 1rem;
+    font-size: ${type.title};
+    line-height: 1.3;
   }
   small {
     display: block;
-    font-size: 11px;
+    font-size: ${type.meta};
     opacity: 0.75;
     margin-bottom: 14px;
   }
@@ -39,11 +41,6 @@ const Feature = styled.div`
     max-width: 70ch;
     margin: 0 0 10px;
   }
-  @media (min-width: 1100px) {
-    p {
-      font-size: 13px;
-    }
-  }
 `;
 
 const Stats = styled.dl`
@@ -53,11 +50,11 @@ const Stats = styled.dl`
   margin: 14px 0;
 
   dt {
-    font-size: 1.3rem;
+    font-size: ${type.title};
   }
   dd {
     margin: 2px 0 0;
-    font-size: 11px;
+    font-size: ${type.meta};
     opacity: 0.75;
   }
 `;

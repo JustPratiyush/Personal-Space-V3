@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { essays } from "../../content/lists";
-import { font } from "../../lib/theme";
+import { font, type } from "../../lib/theme";
 import { Panel, external } from "../ui";
 
 const EssaysPanel = styled(Panel)`
@@ -10,19 +10,19 @@ const EssaysPanel = styled(Panel)`
   line-height: 1.6;
 
   h1 {
-    font-size: 32px;
+    font-size: ${type.headline};
     font-weight: normal;
     margin-bottom: 20px;
   }
   h2 {
-    font-size: clamp(18px, 2vw, 22px);
+    font-size: ${type.title};
     font-weight: normal;
     line-height: 1.3;
     margin: 0 0 8px;
   }
   p {
     color: inherit;
-    font-size: 14px;
+    font-size: ${type.text};
     margin: 8px 0;
   }
   a {
@@ -38,7 +38,7 @@ const EssaysPanel = styled(Panel)`
   }
   small {
     display: block;
-    font-size: 12px;
+    font-size: ${type.meta};
     opacity: 0.7;
   }
   a + a {
@@ -49,7 +49,7 @@ const EssaysPanel = styled(Panel)`
   }
   .foot {
     padding-bottom: 0;
-    font-size: 12px;
+    font-size: ${type.meta};
   }
 `;
 

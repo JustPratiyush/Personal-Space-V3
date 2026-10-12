@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { taste } from "../../content/lists";
-import { colors } from "../../lib/theme";
+import { colors, type } from "../../lib/theme";
 import PixelIcon from "../PixelIcon";
 import { Filters, Grid, ListPanel as TastePanel, Reference } from "../References";
 import { external } from "../ui";
@@ -12,7 +12,7 @@ const Collection = styled.details`
   summary {
     min-height: 44px;
     padding: 12px 0;
-    font-size: 14px;
+    font-size: ${type.text};
     cursor: pointer;
   }
   summary:hover,
@@ -47,11 +47,13 @@ const CollectionList = styled.div`
   small {
     display: block;
     margin-bottom: 5px;
-    font-size: 0.75rem;
+    font-size: ${type.meta};
   }
   strong {
     display: block;
+    font-size: ${type.title};
     font-weight: normal;
+    line-height: 1.3;
   }
   svg {
     width: 28px;

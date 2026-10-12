@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { type } from "../lib/theme";
 
 // A year of GitHub contributions: rounded squares that fill the panel's width,
 // month names centred over their weeks, then the total and a Less–More key
@@ -22,7 +23,7 @@ const DAY_MS = 24 * 60 * 60 * 1000;
 
 const Wrap = styled.div`
   margin: 10px 0 6px;
-  font-size: 12px;
+  font-size: ${type.meta};
   line-height: 1.2;
 `;
 

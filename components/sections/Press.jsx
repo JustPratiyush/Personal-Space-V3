@@ -1,27 +1,29 @@
 import { useEffect } from "react";
 import styled from "styled-components";
 import { press } from "../../content/lists";
-import { colors, font } from "../../lib/theme";
+import { colors, font, type } from "../../lib/theme";
 import { Panel, external } from "../ui";
 
 const PressPanel = styled(Panel)`
   color: ${colors.text};
   font-family: ${font};
-  font-size: 16px;
+  font-size: ${type.text};
   line-height: 1.6;
   text-transform: uppercase;
 
   h1 {
-    font-size: 1.4rem;
-    margin-bottom: 12px;
+    font-size: ${type.headline};
+    font-weight: normal;
+    margin-bottom: 20px;
   }
   article {
     padding: 28px 0;
     border-top: 1px solid rgba(255, 255, 255, 0.18);
   }
   h2 {
-    font-size: 1rem;
+    font-size: ${type.title};
     font-weight: normal;
+    line-height: 1.3;
     margin-bottom: 14px;
   }
   blockquote {
@@ -33,12 +35,12 @@ const PressPanel = styled(Panel)`
     text-underline-offset: 4px;
   }
   .meta {
-    font-size: 12px;
+    font-size: ${type.meta};
     opacity: 0.75;
   }
   .body {
     margin-top: 14px;
-    font-size: 13px;
+    font-size: ${type.text};
     line-height: 1.6;
   }
 `;

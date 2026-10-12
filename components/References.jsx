@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styled, { keyframes } from "styled-components";
-import { colors, font } from "../lib/theme";
+import { colors, font, type } from "../lib/theme";
 import { Panel, external } from "./ui";
 
 // Shared by Taste, Work and Graveyard: filter tabs over a two-column grid of
@@ -15,12 +15,12 @@ export const ListPanel = styled(Panel)`
 
   h1 {
     font: inherit;
-    font-size: 1.4rem;
+    font-size: ${type.headline};
     margin: 0 0 20px;
   }
   p {
-    font-size: 1rem;
-    line-height: 1.5;
+    font-size: ${type.text};
+    line-height: 1.6;
   }
   > p a {
     color: inherit;
@@ -29,9 +29,6 @@ export const ListPanel = styled(Panel)`
   @media (min-width: 1100px) {
     max-width: 1100px;
     padding: 24px 32px;
-    > p {
-      font-size: 14px;
-    }
   }
 `;
 
@@ -111,7 +108,8 @@ const Row = styled.a`
     grid-column: 2;
     margin: 0;
     font: inherit;
-    font-size: 1rem;
+    font-size: ${type.title};
+    line-height: 1.3;
   }
   &[href]:hover h2,
   &[href]:focus-visible h2 {
@@ -122,7 +120,7 @@ const Row = styled.a`
     grid-column: 2;
     margin-top: 4px;
     font: inherit;
-    font-size: 0.8rem;
+    font-size: ${type.meta};
   }
 
   /* Wide screens: name left, source right on one line; a note wraps below. */
@@ -132,14 +130,13 @@ const Row = styled.a`
 
     h2 {
       grid-row: 1;
-      font-size: 14px;
+      padding-right: 14px;
     }
     small {
       grid-column: 3;
       grid-row: 1;
       max-width: 180px;
       margin-top: 0;
-      font-size: 11px;
       text-align: right;
     }
     small + small {
