@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import styled from "styled-components";
-import { NAV_LABELS, NAV_SECTIONS } from "../lib/sections";
+import { NAV_LABELS, NAV_SECTIONS, Section } from "../lib/sections";
 import { colors, font } from "../lib/theme";
 import { MOBILE_BREAKPOINT, useWindowWidth } from "../lib/useWindowWidth";
 
@@ -75,9 +75,13 @@ const Item = styled.button`
   }
 `;
 
+// The graveyard isn't in the nav; it lives under Work.
+const NAV_PARENT = { [Section.graveyard]: Section.work };
+
 function NavItems({ active, onSelect, large }) {
+  const current = NAV_PARENT[active] ?? active;
   return NAV_SECTIONS.map((section) => {
-    const isActive = section === active;
+    const isActive = section === current;
     return (
       <Row key={section}>
         <Marker aria-hidden="true">{isActive ? " ► " : null}</Marker>
