@@ -337,9 +337,15 @@ button:focus-visible { outline: 1px solid var(--fg); outline-offset: 2px; }
   .nav .grave { margin: 4px 0 0; }
   .stage { min-height: 0; padding: 12px 12px 96px; display: block; }
   .panel { padding: 20px 18px; }
-  .hud { font-size: 13px; bottom: 14px; }
-  .hud-l { left: 10px; }
-  .hud-r { right: 12px; }
+  .hud {
+    bottom: 0; width: 50%;
+    padding: 8px 10px;
+    font-size: 12px;
+    background: var(--bg);
+    box-shadow: 0 -1px 0 0 rgba(255, 255, 255, 0.12);
+  }
+  .hud-l { left: 0; }
+  .hud-r { right: 0; }
 }
 
 @media (max-width: 560px) {
