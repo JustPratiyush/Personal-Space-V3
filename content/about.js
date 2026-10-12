@@ -7,7 +7,7 @@ export const about = {
   // "A few things I've done": rotates in a carousel; each line optionally linked.
   done: [
     {
-      text: "Built Retrium OS, a fake operating system that turned into an RPG. The launch reel hit 128K views.",
+      text: "Built Retrium OS, an operating system simulation that turned into an RPG. The launch reel hit 128K views.",
       href: "https://retrium.vercel.app",
     },
     { text: "Trained 10,000 AI birds at once. They beat 10,000 points in under 15 generations.", href: "https://ai-flappy-bird.vercel.app/" },
