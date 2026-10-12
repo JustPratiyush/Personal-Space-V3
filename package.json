@@ -1,0 +1,17 @@
+{
+  "name": "abhinavs-space",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Abhinav Kuchhal's personal site, built on a reconstruction of the hardeep.space architecture.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "14.2.35",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "styled-components": "6.1.19"
+  }
+}

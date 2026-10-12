@@ -1,43 +1,44 @@
 # Abhinav's Space
 
-The source for [abhinavkuchhal.com](https://abhinavkuchhal.com). Plain HTML, one stylesheet, one small script, one font (VCR OSD Mono by Riciery Leal, free from dafont). No build step, no dependencies. Dark only: white, black and grays.
+The source for [abhinavkuchhal.com](https://abhinavkuchhal.com). It's built on a reconstruction of the hardeep.space architecture: Next.js (pages router) and styled-components, one client-side shell, archival black-and-white footage behind a frosted panel, and VCR OSD Mono for every letter.
 
-## Run it locally
+## Run it
 
 ```bash
-python3 scripts/serve.py
+npm install
+npm run dev        # http://localhost:3000
 ```
 
-Then open http://127.0.0.1:4321. The script serves the same clean URLs Vercel does (`/work` → `work.html`).
+To show a live "Currently in …" city on About, set `CURRENT_CITY` (locally or in Vercel's environment variables). Without it the pill says Uttarakhand, India.
 
-## Where things live
+## Edit content
 
-| File | What it is |
+Everything you'd change lives in `content/`:
+
+| What | Where |
 |---|---|
-| `index.html` | About: must fit one screen without scrolling. Keep it short |
-| `work.html` | Retrium OS, the project list, freelance, reels, tools |
-| `essays.html` | Links out to Substack |
-| `taste.html` | Essays, writers, tweets and rabbit holes, in tabs |
-| `press.html` | Press cards |
-| `graveyard.html` | The projects graveyard |
-| `404.html` | "No signal" |
-| `assets/css/site.css` | Colors at the top as CSS variables |
-| `assets/js/site.js` | Clock, play counter, background video, ticker, tabs, heatmap. Every page works without it |
-| `vercel.json` | Clean URLs and redirects from the old `/writings` pages |
+| Site title, top bar, background video | `content/site.js` |
+| About text, the "few things I've done" carousel, links, signature | `content/about.js` |
+| Press, essays, taste (including all the books) | `content/lists.js` |
+| Work: Retrium OS, shipped, freelance, reels, tools | `content/work.js` |
+| Projects graveyard | `content/graveyard.js` |
+| Colors | `lib/theme.js` |
+| Sections and their order in the nav | `lib/sections.js` |
 
-The title bar, nav, background and corners are the same block of markup in every page. If you add or rename a page, update the nav in all of them.
+Search for `TODO` to find what still needs real content (signature, own background footage, the Cupertino Focus Substack link, reel details).
 
-## Background footage
+## Layout
 
-Every page has a `<video class="tv-video" data-src="">` near the top of `<body>`. Put the clip in `assets/video/` (short, muted, MP4, ideally under 5 MB) and set `data-src="/assets/video/your-clip.mp4"` on every page. CSS turns it into old black-and-white TV: grayscale, dimmed, slightly blurred, with grain and scanlines on top. It picks up where it left off when you move between pages.
-
-## Common edits
-
-- **Ticker line on About:** add an `<li><mark>…</mark></li>` to the `ticker` list and bump the `1 of 5` count.
-- **Taste pick:** copy an `<li>` in the right section of `taste.html`. Add `class="mark"` to the link for the "changed how I think" dot.
-- **Taste tab:** copy a whole `<section data-panel>` with a new `id` and `data-panel`, and add a matching `<button role="tab">`.
-- **Press card:** copy the `<article class="press-card">` in `press.html`.
-- **Bury a project:** copy an `<li>` in `graveyard.html`.
-- **Signature:** save the PNG as `assets/img/signature.png` (white on transparent) and uncomment the `<figure class="signature">` at the end of `index.html`.
-
-Search for `TODO` to find what still needs real content.
+```
+pages/            every route re-exports pages/index.js -> client-only <App>
+  api/location.js { city, updatedAt, source } from env vars
+components/
+  App.jsx         shell: video, grain, entrance, nav, top bar, section switch, corners
+  Navigation.jsx  desktop side list + mobile overlay
+  References.jsx  the shared list panel, filter tabs and rows (Taste, Work, Graveyard)
+  Heatmap.jsx     a year of GitHub contributions
+  Carousel.jsx    "a few things I've done"
+  sections/       About, Work, Essays, Taste, Press, Graveyard
+content/          everything above, as plain data
+public/           font, background footage (see public/videos/CREDITS.md), images
+```
