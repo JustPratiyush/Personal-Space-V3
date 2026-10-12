@@ -2,28 +2,46 @@
 (() => {
   const d = document;
   const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const store = (() => {
+    try { return window.sessionStorage; } catch { return null; }
+  })();
 
-  // ---- Slug: live IST clock, date, and days since I started building (1 Dec 2024, IST) ----
-  const BUILDING_SINCE = Date.UTC(2024, 11, 1) - 5.5 * 3600e3;
+  // ---- Corners: IST clock and date (left), a tape counter that keeps running across pages (right) ----
   const timeFmt = new Intl.DateTimeFormat("en-US", {
     timeZone: "Asia/Kolkata", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: true,
   });
   const dateFmt = new Intl.DateTimeFormat("en-US", {
     timeZone: "Asia/Kolkata", month: "short", day: "2-digit", year: "numeric",
   });
-  const clocks = d.querySelectorAll("[data-clock]");
-  const dates = d.querySelectorAll("[data-date]");
-  const days = d.querySelectorAll("[data-day]");
+  const clock = d.querySelector("[data-clock]");
+  const date = d.querySelector("[data-date]");
+  const play = d.querySelector("[data-play]");
+  let tapeStart = Number(store && store.getItem("tapeStart")) || Date.now();
+  if (store) store.setItem("tapeStart", String(tapeStart));
+  const pad = (n) => String(n).padStart(2, "0");
   function tick() {
     const now = new Date();
-    const day = Math.floor((now - BUILDING_SINCE) / 864e5) + 1;
-    clocks.forEach((el) => (el.textContent = `${timeFmt.format(now)} IST`));
-    dates.forEach((el) => (el.textContent = dateFmt.format(now).toUpperCase()));
-    days.forEach((el) => (el.textContent = `Day ${day}`));
+    if (clock) clock.textContent = `${timeFmt.format(now)} IST`;
+    if (date) date.textContent = dateFmt.format(now);
+    if (play) {
+      const s = Math.floor((now - tapeStart) / 1000);
+      play.textContent = `${pad(Math.floor(s / 3600) % 100)}:${pad(Math.floor(s / 60) % 60)}:${pad(s % 60)}`;
+    }
   }
-  if (clocks.length || days.length) {
-    tick();
-    setInterval(tick, 1000);
+  tick();
+  setInterval(tick, 1000);
+
+  // ---- Background footage: loads only once a file is set, resumes where the last page left off ----
+  const video = d.querySelector(".tv-video");
+  if (video && video.dataset.src && !reduceMotion) {
+    video.src = video.dataset.src;
+    const resumeAt = Number(store && store.getItem("tapeAt"));
+    video.addEventListener("loadedmetadata", () => {
+      if (resumeAt && resumeAt < video.duration) video.currentTime = resumeAt;
+    }, { once: true });
+    video.addEventListener("playing", () => video.classList.add("is-on"), { once: true });
+    video.play().catch(() => {});
+    addEventListener("pagehide", () => store && store.setItem("tapeAt", String(video.currentTime)));
   }
 
   // ---- Ticker: "a few things I've done" ----
@@ -41,7 +59,6 @@
     let hovering = false;
 
     list.classList.add("is-live");
-    items[0].classList.add("is-on");
     ctl.hidden = false;
 
     const fit = () => {
@@ -76,28 +93,12 @@
     root.addEventListener("focusin", () => { hovering = true; schedule(); });
     root.addEventListener("focusout", () => { hovering = false; schedule(); });
 
+    go(0);
     fit();
     addEventListener("resize", fit);
-    d.fonts && d.fonts.ready.then(fit);
-    go(0);
+    if (d.fonts) d.fonts.ready.then(fit);
     schedule();
   });
-
-  // ---- Signature: written left to right when it scrolls into view ----
-  const sig = d.querySelector(".signature");
-  if (sig) {
-    if ("IntersectionObserver" in window && !reduceMotion) {
-      const io = new IntersectionObserver((entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          sig.classList.add("is-in");
-          io.disconnect();
-        }
-      }, { threshold: 0.6 });
-      io.observe(sig);
-    } else {
-      sig.classList.add("is-in");
-    }
-  }
 
   // ---- Taste: tabs over plain sections ----
   const tablist = d.querySelector("[data-tabs]");
@@ -135,7 +136,7 @@
     show(tabs.some((t) => t.dataset.tab === fromHash) ? fromHash : tabs[0].dataset.tab);
   }
 
-  // ---- Work: GitHub contributions, drawn in ink ----
+  // ---- Work: GitHub contributions, in grays ----
   const heatmap = d.querySelector("[data-heatmap]");
   if (heatmap) {
     const user = heatmap.dataset.heatmap;
@@ -164,11 +165,14 @@
         let last = "";
         for (let col = 0; col * 7 < cells.length; col++) {
           const first = cells.slice(col * 7, col * 7 + 7).find(Boolean);
-          const label = first ? monthFmt.format(new Date(`${first.date}T00:00:00Z`)) : "";
           const span = d.createElement("span");
-          if (label !== last && first && new Date(`${first.date}T00:00:00Z`).getUTCDate() <= 7) {
-            span.textContent = label;
-            last = label;
+          if (first) {
+            const day = new Date(`${first.date}T00:00:00Z`);
+            const label = monthFmt.format(day);
+            if (label !== last && day.getUTCDate() <= 7) {
+              span.textContent = label;
+              last = label;
+            }
           }
           months.appendChild(span);
         }

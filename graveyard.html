@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Projects Graveyard · Abhinav Kuchhal</title>
-  <meta name="description" content="Here lie Abhinav Kuchhal's side projects, cohort homework and half-ideas. They taught him something, then stopped getting commits.">
+  <meta name="description" content="Here lie Abhinav Kuchhal's side projects, cohort homework and half-ideas.">
   <link rel="canonical" href="https://abhinavkuchhal.com/graveyard">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Abhinav's Space">
@@ -14,161 +14,130 @@
   <meta property="og:image" content="https://abhinavkuchhal.com/assets/img/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@JustPratiyush">
-  <meta name="theme-color" content="#161513">
+  <meta name="theme-color" content="#101012">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
+  <link rel="preload" href="/assets/fonts/vcr-osd-mono.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="stylesheet" href="/assets/css/site.css">
-  <script>document.documentElement.classList.add("js")</script>
   <script src="/assets/js/site.js" defer></script>
   <script src="/_vercel/insights/script.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
-  <header class="masthead">
-    <a class="masthead-title" href="/">Abhinav's Space</a>
-    <span class="masthead-kana" lang="ja" aria-hidden="true">アビナヴ・クチャル</span>
-  </header>
+  <div class="tv" aria-hidden="true">
+    <!-- TODO: background footage. Put the file in /assets/video/ and set data-src, e.g. data-src="/assets/video/tv.mp4". -->
+    <video class="tv-video" data-src="" muted loop playsinline preload="none"></video>
+    <div class="tv-noise"></div>
+    <div class="tv-scan"></div>
+    <div class="tv-vignette"></div>
+  </div>
 
-  <div class="frame">
-    <nav class="side" aria-label="Sections">
-      <ul>
-        <li><a href="/">About</a></li>
-        <li><a href="/work">Work</a></li>
-        <li><a href="/essays">Essays</a></li>
-        <li><a href="/taste">Taste</a></li>
-        <li><a href="/press">Press</a></li>
-      </ul>
-      <a class="side-grave" href="/graveyard" aria-current="page">† Projects Graveyard</a>
-    </nav>
+  <header class="bar"><a href="/">Abhinav's Space</a></header>
 
-    <main class="sheet" id="main">
-      <p class="label kicker">† In loving memory</p>
+  <nav class="nav" aria-label="Sections">
+    <ul>
+      <li><a href="/">About</a></li>
+      <li><a href="/work">Work</a></li>
+      <li><a href="/essays">Essays</a></li>
+      <li><a href="/taste">Taste</a></li>
+      <li><a href="/press">Press</a></li>
+      <li><a class="grave" href="/graveyard" aria-current="page">† Projects Graveyard</a></li>
+    </ul>
+  </nav>
+
+  <main class="stage" id="main">
+    <div class="panel">
       <h1 class="page-title">My Projects Graveyard</h1>
-      <p class="lede">Every builder has one. Here lie the side projects, cohort homework and half-ideas that taught me something, then quietly stopped getting commits. Dates are first commit to last. Pay your respects.</p>
+      <p class="intro">Here lie the side projects, cohort homework and half-ideas that taught me something, then quietly stopped getting commits. Dates are first commit to last. Pay your respects.</p>
 
       <!-- TODO(Abhinav): sign off on the epitaphs. VastuVistar may have been client work; drop it if so. -->
-      <ol class="graves">
+      <ol class="rows">
         <li>
-          <span class="cross" aria-hidden="true">†</span>
-          <div>
-            <h2><a href="https://github.com/JustPratiyush/AI-Powered-Medical-Assistant">AI Medical Assistant</a></h2>
-            <p class="label dates">28 Mar 2025 – 28 Mar 2025</p>
-            <p class="epitaph">Diagnosed everyone. Couldn't diagnose itself.</p>
-          </div>
+          <span class="lead">†</span>
+          <h2 class="name"><a href="https://github.com/JustPratiyush/AI-Powered-Medical-Assistant">AI Medical Assistant</a></h2>
+          <p class="desc">28 Mar 2025 – 28 Mar 2025</p>
+          <p class="desc">Diagnosed everyone. Couldn't diagnose itself.</p>
         </li>
         <li>
-          <span class="cross" aria-hidden="true">†</span>
-          <div>
-            <h2><a href="https://github.com/JustPratiyush/Old_Personal_Website">Old Personal Website</a></h2>
-            <p class="label dates">10 Apr 2025 – 15 Aug 2025</p>
-            <p class="epitaph">Replaced by a better-looking sibling. Then that one got replaced too.</p>
-          </div>
+          <span class="lead">†</span>
+          <h2 class="name"><a href="https://github.com/JustPratiyush/Old_Personal_Website">Old Personal Website</a></h2>
+          <p class="desc">10 Apr 2025 – 15 Aug 2025</p>
+          <p class="desc">Replaced by a better-looking sibling. Then that one got replaced too.</p>
         </li>
         <li>
-          <span class="cross" aria-hidden="true">†</span>
-          <div>
-            <h2><a href="https://github.com/JustPratiyush/Tinder_but_for_Dogs">Tinder but for Dogs</a></h2>
-            <p class="label dates">19 Apr 2025 – 19 Apr 2025</p>
-            <p class="epitaph">Swiped left by the market. Good boys deserved better.</p>
-          </div>
+          <span class="lead">†</span>
+          <h2 class="name"><a href="https://github.com/JustPratiyush/Tinder_but_for_Dogs">Tinder but for Dogs</a></h2>
+          <p class="desc">19 Apr 2025 – 19 Apr 2025</p>
+          <p class="desc">Swiped left by the market. Good boys deserved better.</p>
         </li>
         <li>
-          <span class="cross" aria-hidden="true">†</span>
-          <div>
-            <h2><a href="https://github.com/JustPratiyush/VastuVistar_Website">VastuVistar</a></h2>
-            <p class="label dates">17 May 2025 – 09 Jun 2025</p>
-            <p class="epitaph">Faced every right direction. Still got archived.</p>
-          </div>
+          <span class="lead">†</span>
+          <h2 class="name"><a href="https://github.com/JustPratiyush/VastuVistar_Website">VastuVistar</a></h2>
+          <p class="desc">17 May 2025 – 09 Jun 2025</p>
+          <p class="desc">Faced every right direction. Still got archived.</p>
         </li>
         <li>
-          <span class="cross" aria-hidden="true">†</span>
-          <div>
-            <h2><a href="https://github.com/JustPratiyush/WebDev_Cohort3">WebDev Cohort 3</a></h2>
-            <p class="label dates">05 Nov 2025 – 05 Nov 2025</p>
-            <p class="epitaph">Homework. Did its job, then retired.</p>
-          </div>
+          <span class="lead">†</span>
+          <h2 class="name"><a href="https://github.com/JustPratiyush/WebDev_Cohort3">WebDev Cohort 3</a></h2>
+          <p class="desc">05 Nov 2025 – 05 Nov 2025</p>
+          <p class="desc">Homework. Did its job, then retired.</p>
         </li>
         <li>
-          <span class="cross" aria-hidden="true">†</span>
-          <div>
-            <h2><a href="https://github.com/JustPratiyush/ProgressLens">ProgressLens</a></h2>
-            <p class="label dates">15 Nov 2025 – 15 Nov 2025</p>
-            <p class="epitaph">Tracked everyone's progress but its own.</p>
-          </div>
+          <span class="lead">†</span>
+          <h2 class="name"><a href="https://github.com/JustPratiyush/ProgressLens">ProgressLens</a></h2>
+          <p class="desc">15 Nov 2025 – 15 Nov 2025</p>
+          <p class="desc">Tracked everyone's progress but its own.</p>
         </li>
         <li>
-          <span class="cross" aria-hidden="true">†</span>
-          <div>
-            <h2><a href="https://github.com/JustPratiyush/RetroOS_V2">RetroOS V2</a></h2>
-            <p class="label dates">18 Nov 2025 – 22 Nov 2025</p>
-            <p class="epitaph">The sequel nobody asked for. The original lived on as <a href="/work#retrium">Retrium</a>.</p>
-          </div>
+          <span class="lead">†</span>
+          <h2 class="name"><a href="https://github.com/JustPratiyush/RetroOS_V2">RetroOS V2</a></h2>
+          <p class="desc">18 Nov 2025 – 22 Nov 2025</p>
+          <p class="desc">The sequel nobody asked for. The original lived on as <a href="/work#retrium">Retrium</a>.</p>
         </li>
         <li>
-          <span class="cross" aria-hidden="true">†</span>
-          <div>
-            <h2><a href="https://github.com/JustPratiyush/Digital-Design-and-Computer-Architecture-Notes">Computer Architecture Notes</a></h2>
-            <p class="label dates">24 Nov 2025 – 21 Dec 2025</p>
-            <p class="epitaph">Got me through the exam. Mission complete.</p>
-          </div>
+          <span class="lead">†</span>
+          <h2 class="name"><a href="https://github.com/JustPratiyush/Digital-Design-and-Computer-Architecture-Notes">Computer Architecture Notes</a></h2>
+          <p class="desc">24 Nov 2025 – 21 Dec 2025</p>
+          <p class="desc">Got me through the exam. Mission complete.</p>
         </li>
         <li>
-          <span class="cross" aria-hidden="true">†</span>
-          <div>
-            <h2><a href="https://github.com/JustPratiyush/PaperPulse">PaperPulse</a></h2>
-            <p class="label dates">11 Dec 2025 – 11 Dec 2025</p>
-            <p class="epitaph">No pulse detected.</p>
-          </div>
+          <span class="lead">†</span>
+          <h2 class="name"><a href="https://github.com/JustPratiyush/PaperPulse">PaperPulse</a></h2>
+          <p class="desc">11 Dec 2025 – 11 Dec 2025</p>
+          <p class="desc">No pulse detected.</p>
         </li>
         <li>
-          <span class="cross" aria-hidden="true">†</span>
-          <div>
-            <h2><a href="https://github.com/JustPratiyush/100xDevs_Bootcamp_Projects">100xDevs Bootcamp Projects</a></h2>
-            <p class="label dates">04 Feb 2026 – 04 Feb 2026</p>
-            <p class="epitaph">Survived the bootcamp. Not the week after.</p>
-          </div>
+          <span class="lead">†</span>
+          <h2 class="name"><a href="https://github.com/JustPratiyush/100xDevs_Bootcamp_Projects">100xDevs Bootcamp Projects</a></h2>
+          <p class="desc">04 Feb 2026 – 04 Feb 2026</p>
+          <p class="desc">Survived the bootcamp. Not the week after.</p>
         </li>
         <li>
-          <span class="cross" aria-hidden="true">†</span>
-          <div>
-            <h2><a href="https://github.com/JustPratiyush/mockup-singer-website">Mockup Singer Website</a></h2>
-            <p class="label dates">06 Feb 2026 – 06 Feb 2026</p>
-            <p class="epitaph">Never got its record deal.</p>
-          </div>
+          <span class="lead">†</span>
+          <h2 class="name"><a href="https://github.com/JustPratiyush/mockup-singer-website">Mockup Singer Website</a></h2>
+          <p class="desc">06 Feb 2026 – 06 Feb 2026</p>
+          <p class="desc">Never got its record deal.</p>
         </li>
         <li>
-          <span class="cross" aria-hidden="true">†</span>
-          <div>
-            <h2><a href="https://github.com/JustPratiyush/standup-comedy-website-template">Stand-up Comedy Template</a></h2>
-            <p class="label dates">06 Feb 2026 – 06 Feb 2026</p>
-            <p class="epitaph">Bombed. Tough crowd.</p>
-          </div>
+          <span class="lead">†</span>
+          <h2 class="name"><a href="https://github.com/JustPratiyush/standup-comedy-website-template">Stand-up Comedy Template</a></h2>
+          <p class="desc">06 Feb 2026 – 06 Feb 2026</p>
+          <p class="desc">Bombed. Tough crowd.</p>
         </li>
         <li>
-          <span class="cross" aria-hidden="true">†</span>
-          <div>
-            <h2><a href="https://github.com/JustPratiyush/PracticeOS">PracticeOS</a></h2>
-            <p class="label dates">08 Aug 2026 – 17 Aug 2026</p>
-            <p class="epitaph">Built to make me practice. I didn't.</p>
-          </div>
+          <span class="lead">†</span>
+          <h2 class="name"><a href="https://github.com/JustPratiyush/PracticeOS">PracticeOS</a></h2>
+          <p class="desc">08 Aug 2026 – 17 Aug 2026</p>
+          <p class="desc">Built to make me practice. I didn't.</p>
         </li>
       </ol>
 
-      <p style="margin-top: 28px">Still breathing: <a href="/work">Retrium OS, YouChoose, Follow Check and friends</a>.</p>
-      <p class="inline-links"><a href="https://github.com/JustPratiyush?tab=repositories">Visit the full cemetery on GitHub ↗</a></p>
+      <p class="small" style="margin-top: 22px">Still breathing: <a href="/work">Retrium OS, YouChoose, Follow Check and friends</a>.</p>
+      <p class="small"><a href="https://github.com/JustPratiyush?tab=repositories">Visit the full cemetery on GitHub ↗</a></p>
+    </div>
+  </main>
 
-      <footer class="sheet-foot">
-        <p>Want to resurrect one? DM me on <a href="https://x.com/JustPratiyush">X</a> or <a href="mailto:abhinavkuchhal7@gmail.com">email</a> me.</p>
-      </footer>
-    </main>
-  </div>
-
-  <footer class="slug">
-    <div class="slug-l"><span data-clock>&nbsp;</span><span data-date>Uttarakhand, India</span></div>
-    <div class="slug-r"><span>Issue 01</span><span data-day>Since Dec 2024</span></div>
-  </footer>
+  <div class="hud hud-l" aria-hidden="true"><span data-clock>Uttarakhand</span><span data-date>India</span></div>
+  <div class="hud hud-r" aria-hidden="true"><span>Play</span><span data-play>00:00:00</span></div>
 </body>
 </html>
