@@ -130,11 +130,4 @@ export const taste = {
   ],
   // Optional collapsible list under the grid ({ title, items: [{ icon, topic, title, href }] }).
   collection: null,
-  footer: {
-    text: "Got something that belongs here?",
-    links: [
-      { label: "X", href: "https://x.com/JustPratiyush" },
-      { label: "Email", href: "mailto:abhinavkuchhal7@gmail.com" },
-    ],
-  },
 };

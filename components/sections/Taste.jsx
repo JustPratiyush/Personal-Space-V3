@@ -3,8 +3,15 @@ import styled from "styled-components";
 import { taste } from "../../content/lists";
 import { colors, type } from "../../lib/theme";
 import PixelIcon from "../PixelIcon";
-import { Filters, Grid, ListPanel as TastePanel, Reference } from "../References";
+import { Filters, Grid, ListPanel, Reference } from "../References";
 import { external } from "../ui";
+
+// Taste's lists run long, so their names sit a step below the title size.
+const TastePanel = styled(ListPanel)`
+  article h2 {
+    font-size: ${type.item};
+  }
+`;
 
 const Collection = styled.details`
   margin-top: 16px;
@@ -51,21 +58,13 @@ const CollectionList = styled.div`
   }
   strong {
     display: block;
-    font-size: ${type.title};
+    font-size: ${type.item};
     font-weight: normal;
     line-height: 1.3;
   }
   svg {
     width: 28px;
     height: 28px;
-  }
-`;
-
-const Footer = styled.p`
-  margin-top: 18px;
-
-  a + a {
-    margin-left: 12px;
   }
 `;
 
@@ -123,15 +122,6 @@ export default function Taste() {
           </CollectionList>
         </Collection>
       )}
-
-      <Footer>
-        {taste.footer.text}{" "}
-        {taste.footer.links.map((link) => (
-          <a key={link.href} href={link.href} {...(link.href.startsWith("mailto:") ? {} : external)}>
-            {link.label}
-          </a>
-        ))}
-      </Footer>
     </TastePanel>
   );
 }
