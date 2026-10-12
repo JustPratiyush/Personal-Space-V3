@@ -1,47 +1,43 @@
-<div align="center">
-<img alt="Portfolio" src="https://github.com/dillionverma/portfolio/assets/16860528/57ffca81-3f0a-4425-b31d-094f61725455" width="90%">
-</div>
+# Abhinav's Space
 
-# Portfolio [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fdillionverma%2Fportfolio)
+The source for [abhinavkuchhal.com](https://abhinavkuchhal.com). Plain HTML, one stylesheet, one small script. No build step, no dependencies.
 
-Built with next.js, [shadcn/ui](https://ui.shadcn.com/), and [magic ui](https://magicui.design/), deployed on Vercel.
+## Run it locally
 
-# Features
+```bash
+python3 scripts/serve.py
+```
 
-- Setup only takes a few minutes by editing the [single config file](./src/data/resume.tsx)
-- Built using Next.js 14, React, Typescript, Shadcn/UI, TailwindCSS, Framer Motion, Magic UI
-- Includes my writings
-- Responsive for different devices
-- Optimized for Next.js and Vercel
+Then open http://127.0.0.1:4321. The script serves the same clean URLs Vercel does (`/work` → `work.html`).
 
-# Getting Started Locally
+## Where things live
 
-1. Clone this repository to your local machine:
+| File | What it is |
+|---|---|
+| `index.html` | About: bio, the "few things I've done" ticker, links, signature |
+| `work.html` | Retrium OS, the project index, freelance, reels, tools |
+| `essays.html` | Links out to Substack |
+| `taste.html` | Essays, writers, tweets and rabbit holes, in tabs |
+| `press.html` | Press cards |
+| `graveyard.html` | The projects graveyard |
+| `404.html` | "This page never got printed" |
+| `assets/css/site.css` | Colors live at the top as CSS variables (light, then dark) |
+| `assets/js/site.js` | Clock, ticker, tabs, heatmap, signature. Every page works without it |
+| `vercel.json` | Clean URLs and redirects from the old `/writings` pages |
 
-   ```bash
-   git clone https://github.com/dillionverma/portfolio
-   ```
+The masthead, nav and footer are copied into every page. When you add a page or rename one, update the nav in all of them.
 
-2. Move to the cloned directory
+## Common edits
 
-   ```bash
-   cd portfolio
-   ```
+- **Add a ticker line:** add an `<li><mark>…</mark></li>` to the `ticker` list in `index.html`, and bump the `1 of 5` count.
+- **Add a taste pick:** copy an `<li>` in the right panel of `taste.html`. Add `class="mark"` to the link to give it the red "changed how I think" dot.
+- **Add a taste tab:** copy a whole `<section class="panel">` with a new `id` and `data-panel`, and add a matching `<button role="tab">`.
+- **Add a press card:** copy the `<article class="press-card">` in `press.html`.
+- **Bury a project:** copy an `<li>` in `graveyard.html`.
 
-3. Install dependencies:
+Search for `TODO` to find what still needs real content (Substack post URL, portrait, signature, reel details).
 
-   ```bash
-   pnpm install
-   ```
+## Swapping in the real signature and portrait
 
-4. Start the local Server:
-
-   ```bash
-   pnpm dev
-   ```
-
-5. Open the [Config file](./src/data/resume.tsx) and make changes
-
-# License
-
-Licensed under the [MIT license](https://github.com/dillionverma/portfolio/blob/main/LICENSE.md).
+- **Signature:** export it as an SVG with `fill="currentColor"`, save it as `assets/signature.svg`, and paste its contents into the `.signature` figure in `index.html` in place of the `<text>`. Then remove the Mrs Saint Delafield font link.
+- **Portrait:** save it as `assets/img/portrait.webp` (4:5) and replace the `stamp-empty` block in `index.html` with the snippet in the comment above it.
