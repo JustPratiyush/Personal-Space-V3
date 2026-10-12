@@ -132,8 +132,15 @@
         history.replaceState(null, "", `#${next.dataset.tab}`);
       });
     });
-    const fromHash = location.hash.slice(1);
-    show(tabs.some((t) => t.dataset.tab === fromHash) ? fromHash : tabs[0].dataset.tab);
+    const fromHash = () => {
+      const id = location.hash.slice(1);
+      return tabs.some((t) => t.dataset.tab === id) ? id : null;
+    };
+    show(fromHash() || tabs[0].dataset.tab);
+    addEventListener("hashchange", () => {
+      const id = fromHash();
+      if (id) show(id);
+    });
   }
 
   // ---- Work: GitHub contributions, in grays ----
