@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
-// A year of GitHub contributions in grays. Data comes from a public mirror of
-// the contribution calendar; if it fails, nothing renders.
+// A year of GitHub contributions in GitHub's own greens, gray on hover. Data
+// comes from a public mirror of the contribution calendar; if it fails,
+// nothing renders.
 
 const CELL = 9;
 const GAP = 2;
@@ -37,6 +38,11 @@ const Cells = styled.div`
   grid-template-rows: repeat(7, ${CELL}px);
   gap: ${GAP}px;
   width: max-content;
+  transition: filter 400ms ease;
+
+  &:hover {
+    filter: grayscale(1);
+  }
 
   i {
     display: block;
@@ -45,10 +51,11 @@ const Cells = styled.div`
   i.pad {
     background: none;
   }
-  i[data-l="1"] { background: rgba(255, 255, 255, 0.28); }
-  i[data-l="2"] { background: rgba(255, 255, 255, 0.5); }
-  i[data-l="3"] { background: rgba(255, 255, 255, 0.74); }
-  i[data-l="4"] { background: white; }
+  /* GitHub's dark-mode contribution scale */
+  i[data-l="1"] { background: #0e4429; }
+  i[data-l="2"] { background: #006d32; }
+  i[data-l="3"] { background: #26a641; }
+  i[data-l="4"] { background: #39d353; }
 `;
 
 const Foot = styled.div`
