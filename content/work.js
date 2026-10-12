@@ -1,4 +1,5 @@
-// Work: one featured project, then filter tabs over rows ({ group, name, by, note?, href? }).
+// Work: filter tabs over rows ({ group, name, by, note?, href? }). The featured
+// project opens its group's tab, above the rows.
 
 const YOUCHOOSE_STORE = "https://chromewebstore.google.com/detail/youchoose/cfcegcgfmmgihngficddaoglpfopjnka";
 const FOLLOW_CHECK_STORE = "https://chromewebstore.google.com/detail/follow-check-for-instagra/mackbnaialfjcopijdbkpgabkofafmon";
@@ -9,6 +10,7 @@ export const work = {
   githubUser: "JustPratiyush",
 
   featured: {
+    group: "shipped",
     name: "Retrium OS",
     meta: "Aug 2025 – now · Browser OS · RPG · Vanilla JS",
     image: "/images/retrium.webp",

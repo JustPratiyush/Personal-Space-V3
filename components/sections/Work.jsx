@@ -87,32 +87,6 @@ export default function Work() {
 
       <Heatmap user={work.githubUser} />
 
-      <Feature>
-        <h2>
-          <Highlight>{featured.name}</Highlight>
-        </h2>
-        <small>{featured.meta}</small>
-        <img src={featured.image} alt={featured.imageAlt} width="1400" height="764" />
-        {featured.body.map((line) => (
-          <p key={line}>{line}</p>
-        ))}
-        <Stats>
-          {featured.stats.map((s) => (
-            <div key={s.label}>
-              <dt>{s.value}</dt>
-              <dd>{s.label}</dd>
-            </div>
-          ))}
-        </Stats>
-        <Links>
-          {featured.links.map((link) => (
-            <a key={link.href} href={link.href} {...external}>
-              {link.label} ↗
-            </a>
-          ))}
-        </Links>
-      </Feature>
-
       <Filters aria-label="Filter work">
         {work.groups.map((name) => (
           <button key={name} type="button" aria-pressed={group === name} onClick={() => setGroup(name)}>
@@ -120,6 +94,34 @@ export default function Work() {
           </button>
         ))}
       </Filters>
+
+      {featured.group === group && (
+        <Feature>
+          <h2>
+            <Highlight>{featured.name}</Highlight>
+          </h2>
+          <small>{featured.meta}</small>
+          <img src={featured.image} alt={featured.imageAlt} width="1400" height="764" />
+          {featured.body.map((line) => (
+            <p key={line}>{line}</p>
+          ))}
+          <Stats>
+            {featured.stats.map((s) => (
+              <div key={s.label}>
+                <dt>{s.value}</dt>
+                <dd>{s.label}</dd>
+              </div>
+            ))}
+          </Stats>
+          <Links>
+            {featured.links.map((link) => (
+              <a key={link.href} href={link.href} {...external}>
+                {link.label} ↗
+              </a>
+            ))}
+          </Links>
+        </Feature>
+      )}
 
       <Grid key={group}>
         {visible.map((item) => (
