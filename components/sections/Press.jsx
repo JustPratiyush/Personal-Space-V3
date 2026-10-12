@@ -1,7 +1,7 @@
-import { useEffect } from "react";
 import styled from "styled-components";
 import { press } from "../../content/lists";
 import { colors, font, type } from "../../lib/theme";
+import InstagramEmbed from "../InstagramEmbed";
 import { Panel, external } from "../ui";
 
 const PressPanel = styled(Panel)`
@@ -45,49 +45,9 @@ const PressPanel = styled(Panel)`
   }
 `;
 
-const Embed = styled.div`
-  position: relative;
-  width: 100%;
-  max-width: 350px;
-  min-width: 0;
+const PressEmbed = styled(InstagramEmbed)`
   margin: 20px auto 0;
-  overflow: hidden;
-  contain: inline-size;
-
-  iframe {
-    display: block;
-    position: relative !important;
-  }
-  .instagram-media {
-    min-width: 0 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-  }
 `;
-
-// Instagram's embed.js upgrades the blockquote into an iframe once loaded.
-function InstagramPost({ permalink }) {
-  useEffect(() => {
-    if (window.instgrm) {
-      window.instgrm.Embeds.process();
-      return;
-    }
-    const script = document.createElement("script");
-    script.src = "https://www.instagram.com/embed.js";
-    script.async = true;
-    document.body.appendChild(script);
-  }, [permalink]);
-
-  return (
-    <Embed>
-      <blockquote className="instagram-media" data-instgrm-permalink={permalink} data-instgrm-version="14">
-        <a href={permalink} {...external}>
-          View on Instagram
-        </a>
-      </blockquote>
-    </Embed>
-  );
-}
 
 export default function Press() {
   return (
@@ -109,7 +69,7 @@ export default function Press() {
             </article>
           ))}
         </div>
-        {press.instagramPermalink && <InstagramPost permalink={press.instagramPermalink} />}
+        {press.instagramPermalink && <PressEmbed permalink={press.instagramPermalink} />}
       </div>
     </PressPanel>
   );

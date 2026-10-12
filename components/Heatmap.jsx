@@ -21,8 +21,11 @@ const LEVELS = ["rgba(186, 216, 241, 0.1)", "#28432a", "#3e6c34", "#66a445", "#8
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
+// Fetched once per visit, so leaving the tab and coming back doesn't refetch.
+const cache = {};
+
 const Wrap = styled.div`
-  margin: 10px 0 6px;
+  margin: 10px 0 20px;
   font-size: ${type.meta};
   line-height: 1.2;
 `;
@@ -104,14 +107,19 @@ const monthFmt = new Intl.DateTimeFormat("en-US", { month: "short", timeZone: "U
 const asDate = (s) => new Date(`${s}T00:00:00Z`);
 
 export default function Heatmap({ user }) {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState(() => cache[user] ?? null);
   const scrollRef = useRef(null);
 
   useEffect(() => {
+    if (cache[user]) return;
     const controller = new AbortController();
     fetch(`https://github-contributions-api.jogruber.de/v4/${user}?y=last`, { signal: controller.signal })
       .then((res) => (res.ok ? res.json() : null))
-      .then((json) => json?.contributions?.length && setData(json))
+      .then((json) => {
+        if (!json?.contributions?.length) return;
+        cache[user] = json;
+        setData(json);
+      })
       .catch(() => {});
     return () => controller.abort();
   }, [user]);

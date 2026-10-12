@@ -1,5 +1,6 @@
-// Work: filter tabs over rows ({ group, name, by, note?, href? }). The featured
-// project opens its group's tab, above the rows.
+// Work: filter tabs over rows ({ group, name, by, note?, href? }). The GitHub
+// heatmap and the featured project open their group's tab, above the rows.
+// Items with an `instagram` permalink show the post embedded instead of a row.
 
 const YOUCHOOSE_STORE = "https://chromewebstore.google.com/detail/youchoose/cfcegcgfmmgihngficddaoglpfopjnka";
 const FOLLOW_CHECK_STORE = "https://chromewebstore.google.com/detail/follow-check-for-instagra/mackbnaialfjcopijdbkpgabkofafmon";
@@ -8,6 +9,7 @@ export const work = {
   // Followed by a link to the graveyard.
   intro: "Things I've built, mostly for the browser. The ones that didn't make it are in the",
   githubUser: "JustPratiyush",
+  heatmapGroup: "shipped",
 
   featured: {
     group: "shipped",
@@ -76,47 +78,25 @@ export const work = {
       href: "https://aesthatiq.com/",
     },
 
-    // TODO(Abhinav): confirm what each reel is about and add view counts.
+    // TODO(Abhinav): add view counts.
     {
       group: "reels",
-      name: "“Check the pinned comment for the link”",
-      by: "03 Oct 2026",
-      note: "The Follow Check for Instagram launch",
-      href: "https://www.instagram.com/reel/DeBpztjPDPW/",
-    },
-    { group: "reels", name: "“Something is coming up”", by: "12 Sep 2026", note: "A teaser", href: "https://www.instagram.com/heyyabhinavkuchhal/reel/DdLaDD-PtYf/" },
-    { group: "reels", name: "“A quick introduction”", by: "26 Aug 2026", note: "Who I am and what I build", href: "https://www.instagram.com/heyyabhinavkuchhal/reel/Dch7WGAMUim/" },
-    {
-      group: "reels",
-      name: "“Thanks to everyone who appreciated my project”",
-      by: "12 Aug 2026",
-      note: "Retrium OS, the follow-up",
-      href: "https://www.instagram.com/heyyabhinavkuchhal/reel/Db8E2tqPLDa/",
-    },
-    {
-      group: "reels",
-      name: "“I spent way too long building this fun project”",
+      name: "Introducing Retrium OS",
       by: "02 Aug 2026 · 128K views",
-      note: "The Retrium OS launch",
-      href: "https://www.instagram.com/heyyabhinavkuchhal/reel/DbicaGsv5XM/",
+      instagram: "https://www.instagram.com/reel/DbicaGsv5XM/",
     },
+    { group: "reels", name: "How I made Retrium OS", by: "12 Sep 2026", instagram: "https://www.instagram.com/reel/DdLaDD-PtYf/" },
+    { group: "reels", name: "Follow Check for Instagram", by: "03 Oct 2026", instagram: "https://www.instagram.com/reel/DeBpztjPDPW/" },
 
     // TODO(Abhinav): edit the one-liners so they're how you'd say it.
     { group: "tools", name: "Claude Code", by: "Daily", note: "My pair programmer." },
     { group: "tools", name: "Codex", by: "Daily", note: "A second pair of hands." },
     { group: "tools", name: "Anthropic API", by: "AI", note: "The AI inside AesthetiQ's inventory dashboard." },
     { group: "tools", name: "Figma", by: "Design", note: "Where interfaces start, before any code." },
+    { group: "tools", name: "Adobe Photoshop", by: "Design", note: "Images and graphics." },
+    { group: "tools", name: "Adobe Premiere Pro", by: "Video", note: "Where the reels get edited." },
     { group: "tools", name: "Supabase", by: "Backend", note: "Database and auth for Sub-Stash and AesthetiQ." },
     { group: "tools", name: "Upstash Redis", by: "Backend", note: "Retrium's guestbook." },
     { group: "tools", name: "Vercel", by: "Hosting", note: "Where everything ships, including this site." },
-    { group: "tools", name: "YouChoose", by: "Made by me", note: "YouTube without Shorts or the rabbit holes.", href: YOUCHOOSE_STORE },
-    { group: "tools", name: "Follow Check", by: "Made by me", note: "Keeps my Instagram following honest.", href: FOLLOW_CHECK_STORE },
-    {
-      group: "tools",
-      name: "Video Summariser",
-      by: "Made by me",
-      note: "Long videos into ChatGPT or Claude, in one paste.",
-      href: "https://github.com/JustPratiyush/youtube-video-summarizer-extension",
-    },
   ],
 };
