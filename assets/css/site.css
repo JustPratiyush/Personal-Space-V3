@@ -253,6 +253,12 @@ button:focus-visible { outline: 1px solid var(--fg); outline-offset: 2px; }
   text-decoration: none;
   position: relative;
 }
+.picks .row {
+  display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 10px;
+  padding: 8px 0 8px 23px;
+}
+.group { font-size: 11px; color: var(--fg-2); margin: 22px 0 2px; }
+.note { font-size: 12px; color: var(--fg-2); margin: 6px 0 0; }
 .picks .t { font-size: 14px; }
 .picks .s { font-size: 11px; color: var(--fg-2); }
 .picks a:hover .s { color: var(--ink); }
