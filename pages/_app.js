@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { createGlobalStyle } from "styled-components";
@@ -61,6 +62,7 @@ export default function MyApp({ Component, pageProps }) {
       <GlobalStyle />
       <Cursor />
       <Component {...pageProps} />
+      <Analytics />
     </>
   );
 }
