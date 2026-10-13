@@ -1,73 +1,84 @@
-// Work: filter tabs over rows ({ group, name, by, note?, href? }). The GitHub
-// heatmap and the featured project open their group's tab, above the rows.
-// Items with an `instagram` permalink show the post embedded instead of a row.
+// Work: filter tabs over items ({ group, name, by, ... }). Items with an `image`
+// or an `instagram` permalink show as showcase rows: text on the left (a `note`
+// or `body` paragraphs, optional `stats`, `links`), the picture or post on the
+// right. Other items are compact rows ({ note?, href? }). The GitHub heatmap and
+// the intro open the `heatmapGroup` tab.
 
 const YOUCHOOSE_STORE = "https://chromewebstore.google.com/detail/youchoose/cfcegcgfmmgihngficddaoglpfopjnka";
 const FOLLOW_CHECK_STORE = "https://chromewebstore.google.com/detail/follow-check-for-instagra/mackbnaialfjcopijdbkpgabkofafmon";
 
 export const work = {
-  // Followed by a link to the graveyard.
+  // Under the GitHub heatmap, followed by a link to the graveyard.
   intro: "Things I've built, mostly for the browser. The ones that didn't make it are in the",
   githubUser: "JustPratiyush",
   heatmapGroup: "shipped",
-
-  featured: {
-    group: "shipped",
-    name: "Retrium OS",
-    meta: "Aug 2025 – now · Browser OS · RPG · Vanilla JS",
-    image: "/images/retrium.webp",
-    imageAlt: "Retrium OS: a pixel-art retro desktop with a welcome window, desktop icons and a dock",
-    body: [
-      "A retro operating system in your browser that slowly turns into a role-playing game. Log in as Dash, dig through the Finder, Terminal, Messages and Journal, and find out what's hidden in the machine.",
-      "It started as my portfolio. I designed the pixel-art icons, the UI and the story, and wrote it in plain HTML, CSS and JavaScript. The guestbook runs on Upstash Redis.",
-    ],
-    stats: [
-      { value: "128K", label: "launch reel views" },
-      { value: "1,500+", label: "visitors" },
-      { value: "0", label: "frameworks" },
-    ],
-    links: [
-      { label: "Play it", href: "https://retrium.vercel.app" },
-      { label: "Watch the reel", href: "https://www.instagram.com/heyyabhinavkuchhal/reel/DbicaGsv5XM/" },
-    ],
-  },
 
   groups: ["shipped", "freelance", "reels", "tools"],
   items: [
     {
       group: "shipped",
+      name: "Retrium OS",
+      by: "Aug 2025 – now · Browser OS · RPG · Vanilla JS",
+      body: [
+        "A retro operating system in your browser that slowly turns into a role-playing game. Log in as Dash, dig through the Finder, Terminal, Messages and Journal, and find out what's hidden in the machine.",
+        "It started as my portfolio. I designed the pixel-art icons, the UI and the story, and wrote it in plain HTML, CSS and JavaScript. The guestbook runs on Upstash Redis.",
+      ],
+      stats: [
+        { value: "128K", label: "launch reel views" },
+        { value: "1,500+", label: "visitors" },
+        { value: "0", label: "frameworks" },
+      ],
+      links: [
+        { label: "Play it", href: "https://retrium.vercel.app" },
+        { label: "Watch the reel", href: "https://www.instagram.com/heyyabhinavkuchhal/reel/DbicaGsv5XM/" },
+      ],
+      image: "/images/retrium.webp",
+      imageAlt: "Retrium OS: a pixel-art retro desktop with a welcome window, desktop icons and a dock",
+    },
+    {
+      group: "shipped",
       name: "YouChoose",
-      by: "2026 · Chrome Web Store",
+      by: "2026 · Chrome extension",
       note: "YouTube, my way: blocks Shorts, shows dislikes, filters channels, summarises any video in ChatGPT or Claude.",
-      href: YOUCHOOSE_STORE,
+      links: [{ label: "Chrome Web Store", href: YOUCHOOSE_STORE }],
+      image: "/images/youchoose.webp",
+      imageAlt: "YouChoose's store banner, “YouTube, your way”, beside its settings popup",
     },
     {
       group: "shipped",
       name: "Follow Check for Instagram",
-      by: "2026 · Chrome Web Store",
+      by: "2026 · Chrome extension",
       note: "See who doesn't follow you back, from your logged-in tab. No password, nothing stored.",
-      href: FOLLOW_CHECK_STORE,
+      links: [{ label: "Chrome Web Store", href: FOLLOW_CHECK_STORE }],
+      image: "/images/follow-check.webp",
+      imageAlt: "Follow Check listing the Instagram accounts that don't follow back",
     },
     {
       group: "shipped",
       name: "Video Summariser",
-      by: "2026 · GitHub",
+      by: "2026 · Chrome extension",
       note: "A YouTube transcript lands in ChatGPT or Claude with a detailed summary prompt. Now lives inside YouChoose.",
-      href: "https://github.com/JustPratiyush/youtube-video-summarizer-extension",
+      links: [{ label: "GitHub", href: "https://github.com/JustPratiyush/youtube-video-summarizer-extension" }],
+      image: "/images/video-summariser.webp",
+      imageAlt: "A YouTube video summarised in ChatGPT with one click, from YouChoose",
     },
     {
       group: "shipped",
       name: "Flappy Bird AI",
-      by: "2025 · Live",
+      by: "2025 · Browser game",
       note: "10,000 neural-network birds learn the game at once through a genetic algorithm.",
-      href: "https://ai-flappy-bird.vercel.app/",
+      links: [{ label: "Play it", href: "https://ai-flappy-bird.vercel.app/" }],
+      image: "/images/flappy-bird-ai.webp",
+      imageAlt: "Flappy Bird AI mid-training: a flock of birds, the evolution controls and a live neural network",
     },
     {
       group: "shipped",
       name: "Sub-Stash",
-      by: "2026 · Live",
+      by: "2026 · Web app",
       note: "Tracks subscriptions and recurring bank deductions before they surprise you.",
-      href: "https://sub-stash.vercel.app/",
+      links: [{ label: "Live site", href: "https://sub-stash.vercel.app/" }],
+      image: "/images/sub-stash.webp",
+      imageAlt: "Sub-Stash's dashboard: this month's subscription bill, upcoming renewals and recent payments",
     },
 
     {

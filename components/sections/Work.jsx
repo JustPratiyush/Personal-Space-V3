@@ -2,45 +2,84 @@ import Link from "next/link";
 import { useState } from "react";
 import styled from "styled-components";
 import { work } from "../../content/work";
-import { type } from "../../lib/theme";
+import { colors, type } from "../../lib/theme";
 import Heatmap from "../Heatmap";
 import InstagramEmbed from "../InstagramEmbed";
-import { Filters, Grid, ListPanel, Reference } from "../References";
-import { Highlight, external } from "../ui";
+import PixelIcon from "../PixelIcon";
+import { Filters, Grid, ListPanel, Reference, fade } from "../References";
+import { external } from "../ui";
 
-const Feature = styled.div`
-  margin: 0 0 8px;
-  padding: 18px 0 20px;
+const Intro = styled.p`
+  margin: 0 0 22px;
+`;
+
+// The way into the graveyard: deep red, behind a tombstone.
+const GraveyardLink = styled(Link)`
+  color: ${colors.graveyard};
+  text-underline-offset: 4px;
+  white-space: nowrap;
+
+  svg {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+    vertical-align: -2px;
+  }
+`;
+
+// One project or reel per row: text on the left, its picture or Instagram post
+// on the right; stacked on narrow screens.
+const Showcase = styled.div`
   border-top: 1px solid rgba(255, 255, 255, 0.2);
+  animation: ${fade} 160ms ease;
 
+  > article {
+    display: grid;
+    gap: 16px 32px;
+    padding: 24px 0;
+    border-bottom: 1px solid #ffffff25;
+  }
   h2 {
-    margin: 0 0 10px;
+    margin: 0 0 6px;
     font: inherit;
     font-size: ${type.title};
     line-height: 1.3;
   }
+  h2 a {
+    color: inherit;
+    text-decoration: none;
+  }
+  h2 a:hover,
+  h2 a:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
   small {
     display: block;
+    margin-bottom: 14px;
     font-size: ${type.meta};
     opacity: 0.75;
-    margin-bottom: 14px;
+  }
+  p {
+    max-width: 60ch;
+    margin: 0 0 10px;
   }
   img {
     display: block;
     width: 100%;
-    max-width: 640px;
     height: auto;
-    margin: 0 0 14px;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: left top;
     border: 1px solid rgba(255, 255, 255, 0.09);
-    filter: grayscale(1) contrast(1.05);
-    transition: filter 400ms ease;
   }
-  img:hover {
-    filter: none;
+  @media (min-width: 700px) {
+    > article {
+      grid-template-columns: minmax(0, 1fr) 350px;
+    }
   }
-  p {
-    max-width: 70ch;
-    margin: 0 0 10px;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
   }
 `;
 
@@ -71,57 +110,61 @@ const Links = styled.p`
   }
 `;
 
-// Embedded posts: title and date on the left, the post on the right; stacked
-// on narrow screens.
-const Reels = styled.div`
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+// The title links to the post, or to the item's first link.
+function ShowcaseItem({ item }) {
+  const href = item.instagram ?? item.links?.[0]?.href;
+  const lines = item.body ?? (item.note ? [item.note] : []);
 
-  > article {
-    display: grid;
-    gap: 16px 32px;
-    padding: 24px 0;
-    border-bottom: 1px solid #ffffff25;
-  }
-  h2 {
-    margin: 0 0 6px;
-    font: inherit;
-    font-size: ${type.title};
-    line-height: 1.3;
-  }
-  h2 a {
-    color: inherit;
-    text-decoration: none;
-  }
-  h2 a:hover,
-  h2 a:focus-visible {
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
-  small {
-    display: block;
-    font-size: ${type.meta};
-    opacity: 0.75;
-  }
-  @media (min-width: 700px) {
-    > article {
-      grid-template-columns: minmax(0, 1fr) 350px;
-    }
-  }
-`;
+  return (
+    <article>
+      <div>
+        <h2>
+          <a href={href} {...external}>
+            {item.name}
+          </a>
+        </h2>
+        <small>{item.by}</small>
+        {lines.map((line) => (
+          <p key={line}>{line}</p>
+        ))}
+        {item.stats && (
+          <Stats>
+            {item.stats.map((s) => (
+              <div key={s.label}>
+                <dt>{s.value}</dt>
+                <dd>{s.label}</dd>
+              </div>
+            ))}
+          </Stats>
+        )}
+        {item.links && (
+          <Links>
+            {item.links.map((link) => (
+              <a key={link.href} href={link.href} {...external}>
+                {link.label} ↗
+              </a>
+            ))}
+          </Links>
+        )}
+      </div>
+      {item.instagram ? (
+        <InstagramEmbed permalink={item.instagram} />
+      ) : (
+        <img src={item.image} alt={item.imageAlt} width="960" height="600" loading="lazy" />
+      )}
+    </article>
+  );
+}
 
 export default function Work() {
   const [group, setGroup] = useState(work.groups[0]);
   const visible = work.items.filter((item) => item.group === group);
-  const embeds = visible.filter((item) => item.instagram);
-  const rows = visible.filter((item) => !item.instagram);
-  const { featured } = work;
+  const showcase = visible.filter((item) => item.image || item.instagram);
+  const rows = visible.filter((item) => !item.image && !item.instagram);
 
   return (
     <ListPanel>
       <h1>work</h1>
-      <p>
-        {work.intro} <Link href="/graveyard">graveyard</Link>.
-      </p>
 
       <Filters aria-label="Filter work">
         {work.groups.map((name) => (
@@ -131,52 +174,26 @@ export default function Work() {
         ))}
       </Filters>
 
-      {work.heatmapGroup === group && <Heatmap user={work.githubUser} />}
-
-      {featured.group === group && (
-        <Feature>
-          <h2>
-            <Highlight>{featured.name}</Highlight>
-          </h2>
-          <small>{featured.meta}</small>
-          <img src={featured.image} alt={featured.imageAlt} width="1400" height="764" />
-          {featured.body.map((line) => (
-            <p key={line}>{line}</p>
-          ))}
-          <Stats>
-            {featured.stats.map((s) => (
-              <div key={s.label}>
-                <dt>{s.value}</dt>
-                <dd>{s.label}</dd>
-              </div>
-            ))}
-          </Stats>
-          <Links>
-            {featured.links.map((link) => (
-              <a key={link.href} href={link.href} {...external}>
-                {link.label} ↗
-              </a>
-            ))}
-          </Links>
-        </Feature>
+      {work.heatmapGroup === group && (
+        <>
+          <Heatmap user={work.githubUser} />
+          <Intro>
+            {work.intro}{" "}
+            <GraveyardLink href="/graveyard">
+              <PixelIcon kind="tombstone" />
+              graveyard
+            </GraveyardLink>
+            .
+          </Intro>
+        </>
       )}
 
-      {embeds.length > 0 && (
-        <Reels>
-          {embeds.map((item) => (
-            <article key={item.instagram}>
-              <div>
-                <h2>
-                  <a href={item.instagram} {...external}>
-                    {item.name}
-                  </a>
-                </h2>
-                <small>{item.by}</small>
-              </div>
-              <InstagramEmbed permalink={item.instagram} />
-            </article>
+      {showcase.length > 0 && (
+        <Showcase key={group}>
+          {showcase.map((item) => (
+            <ShowcaseItem key={item.name} item={item} />
           ))}
-        </Reels>
+        </Showcase>
       )}
 
       {rows.length > 0 && (

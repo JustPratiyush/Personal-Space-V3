@@ -22,17 +22,13 @@ export const ListPanel = styled(Panel)`
     font-size: ${type.text};
     line-height: 1.6;
   }
-  > p a {
-    color: inherit;
-    text-underline-offset: 4px;
-  }
   @media (min-width: 1100px) {
     max-width: 1100px;
     padding: 24px 32px;
   }
 `;
 
-const fade = keyframes`
+export const fade = keyframes`
   from { opacity: 0; }
   to { opacity: 1; }
 `;
