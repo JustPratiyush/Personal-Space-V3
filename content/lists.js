@@ -1,10 +1,12 @@
 // Content for Press, Essays and Taste.
 
-// Press: rows like Work's ({ title, meta, url?, quote?, attribution?, body?, links? }),
-// each with a `clipping` (a scanned article: { src, full, width, height, alt })
-// or an Instagram post (`instagram`, `poster`, `posterOnly`, `posterAlt`, as on Work).
+// Press: rows like Work's ({ title, meta, url?, quote?, attribution?, body?, links? }).
+// On the right, a small pile of a `photo` from the show, an Instagram post
+// (`instagram`, `poster`, `posterOnly`, `posterAlt`, as on Work) and the article's
+// `clipping` (a scan: { src, full, width, height, alt }).
 const SAGA_OF_VALOUR = "/images/press/first-india-saga-of-valour.webp";
-const JAGMAL_POST = "https://www.instagram.com/p/DGP-vE0va14/";
+const PLAY_POST = "https://www.instagram.com/p/DGP-vE0va14/";
+const DOCUMENTARY = "https://www.youtube.com/watch?v=rL8x0SCr4S4";
 
 export const press = {
   title: "press",
@@ -12,30 +14,36 @@ export const press = {
     {
       title: "Saga of Valour",
       meta: "First India, Jaipur · 26 Jan 2025 · Divya Kanwaliya",
-      quote: "Stellar act by Pratyush as Jagmal.",
+      quote: "Stellar act by Pratyush",
       attribution: "Photo caption",
       // TODO(Abhinav): check the history line and the joke.
-      body: "A review of Maharana Kika: The Battles Within, Brajwasi Productions' historical drama about Maharana Pratap, which premiered at the Rajasthan International Centre in Jaipur. I played Jagmal, the half-brother who lost the throne and went over to Akbar. They spelled my name Pratyush. I'll take it.",
-      links: [{ label: "Read the clipping", href: SAGA_OF_VALOUR }],
+      body: "A review of Maharana Kika: The Battles Within, Brajwasi Productions' historical drama about Maharana Pratap, which premiered at the Rajasthan International Centre in Jaipur. I played Maharana Pratap's half-brother, the one who lost the throne and went over to Akbar. They spelled my name Pratyush. I'll take it.",
+      links: [
+        { label: "Read the clipping", href: SAGA_OF_VALOUR },
+        { label: "Instagram post", href: PLAY_POST },
+        { label: "Full documentary of our play", href: DOCUMENTARY },
+      ],
+      photo: {
+        src: "/images/press/maharana-kika-stage.webp",
+        width: 720,
+        height: 720,
+        alt: "A battle scene from Maharana Kika: silhouetted soldiers in front of a projected war",
+        href: DOCUMENTARY,
+      },
+      // The post on its second photo, in costume: a saved picture linking to
+      // the post, since the live embed always opens on the first.
+      instagram: PLAY_POST,
+      poster: { src: "/images/instagram/DGP-vE0va14-2.webp", width: 348, height: 556 },
+      posterOnly: true,
+      posterAlt: "In costume: a turban, white robes and a drawn sword",
       // City First, page 12 of the Jaipur edition, cut from the paper's PDF.
       clipping: {
         src: "/images/press/first-india-saga-of-valour-720.webp",
         full: SAGA_OF_VALOUR,
         width: 720,
         height: 659,
-        alt: "First India's “Saga of Valour” by Divya Kanwaliya, with two photos from Maharana Kika, one captioned “Stellar act by Pratyush as Jagmal”",
+        alt: "First India's “Saga of Valour” by Divya Kanwaliya, with two photos from Maharana Kika, one captioned “Stellar act by Pratyush”",
       },
-    },
-    {
-      title: "Jagmal, on Instagram",
-      meta: "19 Feb 2025 · seven photos from the play",
-      url: JAGMAL_POST,
-      // On its second photo, Jagmal in costume: a saved picture linking to the
-      // post, since the live embed always opens on the first.
-      instagram: JAGMAL_POST,
-      poster: { src: "/images/instagram/DGP-vE0va14-2.webp", width: 348, height: 556 },
-      posterOnly: true,
-      posterAlt: "Jagmal in costume: a turban, white robes and a drawn sword",
     },
   ],
 };

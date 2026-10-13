@@ -13,7 +13,7 @@ export const about = {
     { text: "Trained 10,000 AI birds at once. They beat 10,000 points in under 15 generations.", href: "https://ai-flappy-bird.vercel.app/" },
     { text: "Co-founded a design agency in first year. It died. I wrote the post-mortem.", href: "/essays" },
     { text: "Built the marketplace and AI inventory dashboard for AesthetiQ.", href: "https://aesthatiq.com/" },
-    { text: "Played Jagmal at the Rajasthan International Centre and made the newspaper.", href: "/press" },
+    { text: "Acted in Maharana Kika at the Rajasthan International Centre and made the newspaper.", href: "/press" },
   ],
   // Inline highlighted terms with hover-preview cards. Empty hides the line.
   places: [],
