@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { createGlobalStyle } from "styled-components";
 import Cursor from "../components/Cursor";
 import { site } from "../content/site";
+import { PRELOADS } from "../lib/preloads";
 import { SECTION_TITLES, sectionFromPath } from "../lib/sections";
 import { font } from "../lib/theme";
 
@@ -40,7 +41,8 @@ const GlobalStyle = createGlobalStyle`
 
 export default function MyApp({ Component, pageProps }) {
   const router = useRouter();
-  const title = SECTION_TITLES[sectionFromPath(router.asPath)] ?? site.title;
+  const section = sectionFromPath(router.asPath);
+  const title = SECTION_TITLES[section] ?? site.title;
 
   return (
     <>
@@ -58,6 +60,9 @@ export default function MyApp({ Component, pageProps }) {
         <meta property="og:image" content={`${site.url}/og.png`} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@JustPratiyush" />
+        {(PRELOADS[section] ?? []).map((src) => (
+          <link key={src} rel="preload" as="image" href={src} />
+        ))}
       </Head>
       <GlobalStyle />
       <Cursor />
