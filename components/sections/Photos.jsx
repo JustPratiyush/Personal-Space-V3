@@ -52,11 +52,15 @@ const Lightbox = styled.dialog`
   &::backdrop {
     background: rgba(0, 0, 0, 0.88);
   }
+  /* Sized from the photo's ratio at once, with the gallery copy (already
+     loaded) underneath until the full one arrives. */
   img {
     display: block;
-    max-width: 92vw;
-    max-height: 80vh;
+    width: min(92vw, calc(80vh * var(--ratio, 1)));
+    height: auto;
+    aspect-ratio: var(--ratio, 1);
     margin: 0 auto;
+    background: center / cover no-repeat;
   }
   figcaption {
     margin-top: 10px;
@@ -131,7 +135,11 @@ export default function Photos() {
       >
         {current && (
           <figure>
-            <img src={current.full ?? current.src} alt={current.alt} />
+            <img
+              src={current.full ?? current.src}
+              alt={current.alt}
+              style={{ "--ratio": current.width / current.height, backgroundImage: `url(${current.src})` }}
+            />
             {current.caption && <figcaption>{current.caption}</figcaption>}
             <nav>
               {count > 1 && (
