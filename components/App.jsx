@@ -16,6 +16,7 @@ import { useEntrance } from "./useEntrance";
 import About from "./sections/About";
 import Essays from "./sections/Essays";
 import Graveyard from "./sections/Graveyard";
+import Photos from "./sections/Photos";
 import Press from "./sections/Press";
 import Taste from "./sections/Taste";
 import Work from "./sections/Work";
@@ -26,6 +27,7 @@ const SECTION_COMPONENTS = {
   [Section.essays]: Essays,
   [Section.taste]: Taste,
   [Section.press]: Press,
+  [Section.photos]: Photos,
   [Section.graveyard]: Graveyard,
 };
 

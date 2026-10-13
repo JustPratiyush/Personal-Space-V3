@@ -22,6 +22,7 @@ Everything you'd change lives in `content/`:
 | Press, essays, taste (including all the books) | `content/lists.js` |
 | Work: Retrium OS, shipped, freelance, reels, tools | `content/work.js` |
 | Projects graveyard | `content/graveyard.js` |
+| Photos gallery | `content/photos.js` |
 | Colors | `lib/theme.js` |
 | Sections and their order in the nav | `lib/sections.js` |
 
@@ -38,7 +39,7 @@ components/
   References.jsx  the shared list panel, filter tabs and rows (Taste, Work, Graveyard)
   Heatmap.jsx     a year of GitHub contributions
   Carousel.jsx    "a few things I've done"
-  sections/       About, Work, Essays, Taste, Press, Graveyard
+  sections/       About, Work, Essays, Taste, Press, Photos, Graveyard
 content/          everything above, as plain data
 public/           font, background footage (see public/videos/CREDITS.md), images
 ```

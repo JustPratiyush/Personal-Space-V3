@@ -10,6 +10,14 @@ import { Filters, Grid, ListPanel, Reference } from "../References";
 import { Links, Showcase } from "../Showcase";
 import { Highlight, external } from "../ui";
 
+// Divides the tabs from the Shipped tab's heatmap, as the rows' top border does
+// on the other tabs.
+const Rule = styled.hr`
+  margin: 0 0 14px;
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+`;
+
 const Intro = styled.p`
   margin: 0 0 22px;
 `;
@@ -144,6 +152,7 @@ export default function Work({ contributions }) {
 
       {work.heatmapGroup === group && (
         <>
+          <Rule />
           <Heatmap user={work.githubUser} initialData={contributions} />
           <Intro>
             <Highlight>
