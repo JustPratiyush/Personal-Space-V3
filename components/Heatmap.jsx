@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { contributionsUrl } from "../lib/contributions";
 import { type } from "../lib/theme";
 
 // A year of GitHub contributions: rounded squares that fill the panel's width,
 // month names centred over their weeks, then the total and a Less–More key
-// under a rule. Data comes from a public mirror of the contribution calendar;
-// if it fails, nothing renders.
+// under a rule. The data usually arrives with the page (`initialData`); without
+// it, it's fetched here, and if that fails nothing renders.
 
 // Grid geometry in SVG units. The SVG scales to the width, never below one
 // unit per pixel; narrower screens scroll.
@@ -21,7 +22,7 @@ const LEVELS = ["rgba(186, 216, 241, 0.1)", "#28432a", "#3e6c34", "#66a445", "#8
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
-// Fetched once per visit, so leaving the tab and coming back doesn't refetch.
+// Kept for the visit, so leaving the tab and coming back doesn't refetch.
 const cache = {};
 
 const Wrap = styled.div`
@@ -106,23 +107,22 @@ const Key = styled.span`
 const monthFmt = new Intl.DateTimeFormat("en-US", { month: "short", timeZone: "UTC" });
 const asDate = (s) => new Date(`${s}T00:00:00Z`);
 
-export default function Heatmap({ user }) {
-  const [data, setData] = useState(() => cache[user] ?? null);
+export default function Heatmap({ user, initialData }) {
+  const [data, setData] = useState(() => initialData ?? cache[user] ?? null);
   const scrollRef = useRef(null);
 
   useEffect(() => {
-    if (cache[user]) return;
+    if (data) {
+      cache[user] = data;
+      return;
+    }
     const controller = new AbortController();
-    fetch(`https://github-contributions-api.jogruber.de/v4/${user}?y=last`, { signal: controller.signal })
+    fetch(contributionsUrl(user), { signal: controller.signal })
       .then((res) => (res.ok ? res.json() : null))
-      .then((json) => {
-        if (!json?.contributions?.length) return;
-        cache[user] = json;
-        setData(json);
-      })
+      .then((json) => json?.contributions?.length && setData(json))
       .catch(() => {});
     return () => controller.abort();
-  }, [user]);
+  }, [user, data]);
 
   // Start scrolled to the most recent weeks on narrow screens.
   useEffect(() => {

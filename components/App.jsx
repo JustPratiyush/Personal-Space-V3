@@ -106,7 +106,8 @@ const Entrance = styled.div`
   }
 `;
 
-export default function App() {
+// Page props (the Work page's prefetched contributions) pass through to the section.
+export default function App(pageProps) {
   const router = useRouter();
   const videoRef = useRef(null);
   const width = useWindowWidth();
@@ -153,7 +154,7 @@ export default function App() {
           </Title>
         </TopBar>
         <Stage>
-          <ActiveSection />
+          <ActiveSection {...pageProps} />
         </Stage>
         <Clock />
         <PlayTimer />
