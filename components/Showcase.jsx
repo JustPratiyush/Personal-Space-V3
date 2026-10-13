@@ -48,3 +48,15 @@ export const Showcase = styled.div`
     animation: none;
   }
 `;
+
+// A row's links: "Play it ↗  GitHub ↗".
+export const Links = styled.p`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+
+  a {
+    color: inherit;
+    text-underline-offset: 4px;
+  }
+`;

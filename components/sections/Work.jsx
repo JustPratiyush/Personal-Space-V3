@@ -7,7 +7,7 @@ import Heatmap from "../Heatmap";
 import InstagramEmbed from "../InstagramEmbed";
 import PixelIcon from "../PixelIcon";
 import { Filters, Grid, ListPanel, Reference } from "../References";
-import { Showcase } from "../Showcase";
+import { Links, Showcase } from "../Showcase";
 import { Highlight, external } from "../ui";
 
 const Intro = styled.p`
@@ -71,17 +71,6 @@ const Stats = styled.dl`
     margin: 2px 0 0;
     font-size: ${type.meta};
     opacity: 0.75;
-  }
-`;
-
-const Links = styled.p`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 18px;
-
-  a {
-    color: inherit;
-    text-underline-offset: 4px;
   }
 `;
 

@@ -57,6 +57,7 @@ export const work = {
       links: [
         { label: "Chrome Web Store", href: FOLLOW_CHECK_STORE },
         { label: "GitHub", href: github("instagram-followers-check-extension") },
+        { label: "Watch the reel", href: "https://www.instagram.com/reel/DeBpztjPDPW/" },
       ],
       icon: "/images/icons/follow-check.webp",
     },
