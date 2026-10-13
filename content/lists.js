@@ -1,6 +1,7 @@
 // Content for Press, Essays and Taste.
 
-// Press: quote cards ("coverage") plus an optional Instagram post embed.
+// Press: quote cards ("coverage"), each with an optional Instagram post beside it
+// (`instagram`, `poster`, `posterOnly`, `posterAlt`, as on Work).
 export const press = {
   title: "press",
   coverage: [
@@ -12,10 +13,14 @@ export const press = {
       // TODO(Abhinav): check the history line and the joke.
       body: "A review of Brajwasi Productions' historical drama about Maharana Pratap, which premiered at the Rajasthan International Centre in Jaipur. I played Jagmal, the half-brother who lost the throne and went over to Akbar. They spelled my name Pratyush. I'll take it.",
       url: "https://www.instagram.com/p/DGP-vE0va14/",
+      // The play post on its second photo, Jagmal in costume: a saved picture
+      // linking to the post, since the live embed always opens on the first.
+      instagram: "https://www.instagram.com/p/DGP-vE0va14/",
+      poster: { src: "/images/instagram/DGP-vE0va14-2.webp", width: 348, height: 556 },
+      posterOnly: true,
+      posterAlt: "Jagmal in costume: a turban, white robes and a drawn sword",
     },
   ],
-  // The play post: Jagmal in costume, and the First India clipping in the carousel.
-  instagramPermalink: "https://www.instagram.com/p/DGP-vE0va14/",
 };
 
 export const essays = {

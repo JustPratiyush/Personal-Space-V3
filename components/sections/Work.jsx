@@ -6,16 +6,22 @@ import { colors, type } from "../../lib/theme";
 import Heatmap from "../Heatmap";
 import InstagramEmbed from "../InstagramEmbed";
 import PixelIcon from "../PixelIcon";
-import { Filters, Grid, ListPanel, Reference, fade } from "../References";
-import { external } from "../ui";
+import { Filters, Grid, ListPanel, Reference } from "../References";
+import { Showcase } from "../Showcase";
+import { Highlight, external } from "../ui";
 
 const Intro = styled.p`
   margin: 0 0 22px;
 `;
 
-// The way into the graveyard: deep red, behind a tombstone.
+// The way into the graveyard: deep red, behind a tombstone. `&&` keeps the red
+// and the underline over Highlight's plain black links.
 const GraveyardLink = styled(Link)`
-  color: ${colors.graveyard};
+  &&,
+  &&:visited {
+    color: ${colors.graveyard};
+    text-decoration: underline;
+  }
   text-underline-offset: 4px;
   white-space: nowrap;
 
@@ -27,59 +33,28 @@ const GraveyardLink = styled(Link)`
   }
 `;
 
-// One project or reel per row: text on the left, its picture or Instagram post
-// on the right; stacked on narrow screens.
-const Showcase = styled.div`
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-  animation: ${fade} 160ms ease;
+// A project's screenshot, or its icon on a plain card, in one 16:10 frame.
+const Shot = styled.img`
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: left top;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+`;
 
-  > article {
-    display: grid;
-    gap: 16px 32px;
-    padding: 24px 0;
-    border-bottom: 1px solid #ffffff25;
-  }
-  h2 {
-    margin: 0 0 6px;
-    font: inherit;
-    font-size: ${type.title};
-    line-height: 1.3;
-  }
-  h2 a {
-    color: inherit;
-    text-decoration: none;
-  }
-  h2 a:hover,
-  h2 a:focus-visible {
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
-  small {
-    display: block;
-    margin-bottom: 14px;
-    font-size: ${type.meta};
-    opacity: 0.75;
-  }
-  p {
-    max-width: 60ch;
-    margin: 0 0 10px;
-  }
+const IconCard = styled.div`
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 10;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background: rgba(255, 255, 255, 0.04);
+
   img {
-    display: block;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 16 / 10;
-    object-fit: cover;
-    object-position: left top;
-    border: 1px solid rgba(255, 255, 255, 0.09);
-  }
-  @media (min-width: 700px) {
-    > article {
-      grid-template-columns: minmax(0, 1fr) 350px;
-    }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    animation: none;
+    width: 112px;
+    height: 112px;
+    border-radius: 22%;
   }
 `;
 
@@ -148,19 +123,23 @@ function ShowcaseItem({ item }) {
         )}
       </div>
       {item.instagram ? (
-        <InstagramEmbed permalink={item.instagram} />
+        <InstagramEmbed permalink={item.instagram} poster={item.poster} alt={item.name} />
+      ) : item.icon ? (
+        <IconCard>
+          <img src={item.icon} alt="" width="256" height="256" />
+        </IconCard>
       ) : (
-        <img src={item.image} alt={item.imageAlt} width="960" height="600" loading="lazy" />
+        <Shot src={item.image} alt={item.imageAlt} width="960" height="600" loading="lazy" />
       )}
     </article>
   );
 }
 
-export default function Work() {
+export default function Work({ contributions }) {
   const [group, setGroup] = useState(work.groups[0]);
   const visible = work.items.filter((item) => item.group === group);
-  const showcase = visible.filter((item) => item.image || item.instagram);
-  const rows = visible.filter((item) => !item.image && !item.instagram);
+  const showcase = visible.filter((item) => item.image || item.icon || item.instagram);
+  const rows = visible.filter((item) => !item.image && !item.icon && !item.instagram);
 
   return (
     <ListPanel>
@@ -176,14 +155,16 @@ export default function Work() {
 
       {work.heatmapGroup === group && (
         <>
-          <Heatmap user={work.githubUser} />
+          <Heatmap user={work.githubUser} initialData={contributions} />
           <Intro>
-            {work.intro}{" "}
-            <GraveyardLink href="/graveyard">
-              <PixelIcon kind="tombstone" />
-              graveyard
-            </GraveyardLink>
-            .
+            <Highlight>
+              {work.intro}{" "}
+              <GraveyardLink href="/graveyard">
+                <PixelIcon kind="tombstone" />
+                graveyard
+              </GraveyardLink>
+              .
+            </Highlight>
           </Intro>
         </>
       )}

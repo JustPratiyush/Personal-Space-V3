@@ -2,8 +2,11 @@ import styled from "styled-components";
 import { press } from "../../content/lists";
 import { colors, font, type } from "../../lib/theme";
 import InstagramEmbed from "../InstagramEmbed";
+import { Showcase } from "../Showcase";
 import { Panel, external } from "../ui";
 
+// As wide as Work's panel on large screens, so the post sits beside the text
+// the same way.
 const PressPanel = styled(Panel)`
   color: ${colors.text};
   font-family: ${font};
@@ -16,61 +19,49 @@ const PressPanel = styled(Panel)`
     font-weight: normal;
     margin-bottom: 20px;
   }
-  article {
-    padding: 28px 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.18);
-  }
-  h2 {
-    font-size: ${type.title};
-    font-weight: normal;
-    line-height: 1.3;
-    margin-bottom: 14px;
-  }
   blockquote {
-    margin: 20px 0 14px;
+    margin: 0 0 10px;
     font-family: inherit;
-  }
-  article a {
-    color: inherit;
-    text-underline-offset: 4px;
   }
   .meta {
     font-size: ${type.meta};
     opacity: 0.75;
   }
-  .body {
-    margin-top: 14px;
-    font-size: ${type.text};
-    line-height: 1.6;
+  @media (min-width: 1100px) {
+    max-width: 1100px;
+    padding: 24px 32px;
   }
-`;
-
-const PressEmbed = styled(InstagramEmbed)`
-  margin: 20px auto 0;
 `;
 
 export default function Press() {
   return (
     <PressPanel>
       <h1>{press.title}</h1>
-      <div className="press-layout">
-        <div className="coverage">
-          {press.coverage.map((item) => (
-            <article key={item.url}>
+      <Showcase>
+        {press.coverage.map((item) => (
+          <article key={item.url}>
+            <div>
               <h2>
                 <a href={item.url} {...external}>
                   {item.outlet}
                 </a>
               </h2>
-              {item.meta && <p className="meta">{item.meta}</p>}
+              {item.meta && <small>{item.meta}</small>}
               <blockquote>&ldquo;{item.quote}&rdquo;</blockquote>
               {item.attribution && <p className="meta">{item.attribution}</p>}
-              {item.body && <p className="body">{item.body}</p>}
-            </article>
-          ))}
-        </div>
-        {press.instagramPermalink && <PressEmbed permalink={press.instagramPermalink} />}
-      </div>
+              {item.body && <p>{item.body}</p>}
+            </div>
+            {item.instagram && (
+              <InstagramEmbed
+                permalink={item.instagram}
+                poster={item.poster}
+                posterOnly={item.posterOnly}
+                alt={item.posterAlt}
+              />
+            )}
+          </article>
+        ))}
+      </Showcase>
     </PressPanel>
   );
 }

@@ -32,6 +32,9 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <link rel="preload" href="/fonts/VCR_OSD_MONO.ttf" as="font" type="font/ttf" crossOrigin="anonymous" />
+          {/* Instagram embeds on Work and Press start connecting before they're needed. */}
+          <link rel="preconnect" href="https://www.instagram.com" />
+          <link rel="preconnect" href="https://static.cdninstagram.com" />
           {/* Vercel Web Analytics: only exists on Vercel deployments. */}
           {process.env.NODE_ENV === "production" && <script defer src="/_vercel/insights/script.js" />}
         </Head>
